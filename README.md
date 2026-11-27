@@ -1,25 +1,26 @@
-# 🎈 Blank app template
+# 🌤️ 東京の天気（過去7日間・今後7日間）
 
-A simple Streamlit app template for you to modify!
+東京の過去1週間および今後1週間の天気予報・気象データを可視化する Streamlit Web アプリケーションです。
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+## 主な機能
 
-### How to run it on your own machine
+- **2週間分の天気データ表示**: 過去7日間と今後7日間（合計14日間）の天気・最高気温・最低気温・降水量を一覧表示します。
+- **区分ラベルの自動付与**: 日本時間（`Asia/Tokyo`）を基準に「⏪ 過去」「📍 今日」「⏩ 予報」を自動で判別します。
+- **気温推移グラフ**: 最高気温と最低気温の日別推移を折れ線グラフで可視化します。
+- **APIキャッシュ機能**: `@st.cache_data(ttl=3600)` により取得データを1時間キャッシュし、APIへの過剰なアクセスを防ぎます。
 
-Prerequisite: install `uv` if you don't already have it.
+## 使用技術・データソース
 
-```
-$ curl -LsSf https://astral.sh/uv/install.sh | sh
-```
+- **フレームワーク**: [Streamlit](https://streamlit.io/)
+- **データ処理**: pandas, requests
+- **気象データ API**: [Open-Meteo Weather Forecast API](https://open-meteo.com/)（APIキー不要・非商用利用無料）
+  - 対象座標: 東京（緯度 `35.6762`, 経度 `139.6503`）
+  - タイムゾーン: `Asia/Tokyo`
 
-1. Sync the dependencies
+## ファイル構成
 
-   ```
-   $ uv sync
-   ```
-
-2. Run the app
-
-   ```
-   $ uv run streamlit run streamlit_app.py
-   ```
+```text
+.
+├── streamlit_app.py   # アプリケーション本体
+├── requirements.txt   # 依存パッケージ一覧
+└── README.md          # 本ファイル
